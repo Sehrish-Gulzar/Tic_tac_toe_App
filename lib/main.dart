@@ -10,7 +10,6 @@ class TicTacToeApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Tic Tac Toe',
       theme: ThemeData(
         primarySwatch: Colors.purple,
       ),
@@ -47,7 +46,7 @@ class _TicTacToeScreenState extends State<TicTacToeScreen> {
   void _initializeAudioPlayer() {
     _audioPlayer = AssetsAudioPlayer();
     _audioPlayer.open(
-      Audio('assets/audio/summer-walk-152722.mp3'),
+      Audio('assets/audio/Beautiful-Piano(chosic.com).mp3'),
       loopMode: LoopMode.single,
     );
     _audioPlayer.play();
@@ -59,7 +58,6 @@ class _TicTacToeScreenState extends State<TicTacToeScreen> {
         _board[row][col] = _currentPlayer;
         _checkWinner(row, col);
         if (_winner == '') {
-          // Add this condition
           _togglePlayer();
         }
       });
@@ -148,14 +146,39 @@ class _TicTacToeScreenState extends State<TicTacToeScreen> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text('Winner'),
-          content: Text('Congratulations, $winner! You won the game.'),
+          content: RichText(
+            text: TextSpan(
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 16,
+              ),
+              children: [
+                TextSpan(
+                  text: 'Congratulations, ',
+                ),
+                TextSpan(
+                  text: '$winner',
+                  style: TextStyle(
+                    color: Colors.green,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                TextSpan(
+                  text: '! You won the game.',
+                ),
+              ],
+            ),
+          ),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
                 _resetGame();
               },
-              child: Text('Play Again'),
+              child: Text(
+                'Play Again',
+                style: TextStyle(color: Color(0xffff3c84a3)),
+              ),
             ),
           ],
         );
@@ -197,7 +220,7 @@ class _TicTacToeScreenState extends State<TicTacToeScreen> {
             style: TextStyle(
               fontSize: 48,
               fontWeight: FontWeight.bold,
-              color: _board[row][col] == 'X' ? Colors.blue : Colors.red,
+              color: _board[row][col] == 'X' ? Color(0Xffff5e2fd6) : Colors.red,
             ),
           ),
         ),
@@ -205,7 +228,7 @@ class _TicTacToeScreenState extends State<TicTacToeScreen> {
             ? BoxDecoration(
                 border: Border.all(
                   color: Colors.green,
-                  width: 4,
+                  width: 5,
                 ),
               )
             : null,
@@ -217,85 +240,134 @@ class _TicTacToeScreenState extends State<TicTacToeScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          title: Center(child: Text('Tic Tac Toe')),
-          actions: [
-            IconButton(
-              onPressed: _toggleMusic,
-              icon: Icon(
-                _isMusicOn ? Icons.music_note : Icons.music_off,
+        // appBar: AppBar(
+        //   actions: [
+        //     IconButton(
+        //       onPressed: _toggleMusic,
+        //       icon: Icon(
+        //         _isMusicOn ? Icons.music_note : Icons.music_off,
+        //       ),
+        //     ),
+        //   ],
+        // ),
+        body: Stack(
+          fit: StackFit.expand,
+          children: <Widget>[
+            Image(
+              image: new AssetImage(
+                  "assets/images/stylish-blue-abstract-background-with-text-space.jpg"),
+              fit: BoxFit.cover,
+              color: Colors.black12,
+              colorBlendMode: BlendMode.darken,
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: MediaQuery.sizeOf(context).width * 0.05,
+                vertical: MediaQuery.sizeOf(context).height * 0.1,
+              ),
+              child: Align(
+                alignment: Alignment.topLeft,
+                child: Container(
+                  child: Image(
+                      image: new AssetImage(
+                          "assets/images/logo-no-background.png"),
+                      filterQuality: FilterQuality.high),
+                ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.topRight,
+              child: IconButton(
+                onPressed: _toggleMusic,
+                icon: Icon(
+                  _isMusicOn ? Icons.music_note : Icons.music_off,
+                  color: Color(0xffff3c84a3),
+                ),
+              ),
+            ),
+            SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Align(
+                    alignment: Alignment.center,
+                    child: SizedBox(
+                      height: MediaQuery.of(context).size.height / 5,
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.center,
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: Colors.grey[300],
+                          border:
+                              Border.all(color: Color(0xffff3c84a3), width: 4)),
+                      width: MediaQuery.of(context).size.width / 1.1,
+                      child: GridView.builder(
+                        shrinkWrap: true,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3,
+                        ),
+                        itemBuilder: (context, index) {
+                          final row = index ~/ 3;
+                          final col = index % 3;
+                          return _buildCell(col, row);
+                        },
+                        itemCount: 9,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    height: 60,
+                    width: 270,
+                    margin: EdgeInsets.all(30),
+                    decoration: BoxDecoration(
+                        color: Colors.transparent,
+                        border: Border.all(
+                          width: 2.5,
+                          color: Color(0xffff3c84a3),
+                        ),
+                        borderRadius: BorderRadius.circular(5)),
+                    child: Center(
+                      child: Text.rich(
+                        TextSpan(
+                          text: _winner != '' ? 'Winner: ' : 'Current Player: ',
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                          children: [
+                            if (_winner != '')
+                              TextSpan(
+                                text: '$_winner',
+                                style: TextStyle(
+                                  color: Colors.green,
+                                ),
+                              ),
+                            if (_winner == '' && _currentPlayer.isNotEmpty)
+                              TextSpan(
+                                text: _currentPlayer,
+                                style: TextStyle(
+                                  color: _currentPlayer == 'X'
+                                      ? Color(0Xffff5e2fd6)
+                                      : Colors.red,
+                                ),
+                              ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
         ),
-        body: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage("assets/images/2863231.jpg"),
-              fit: BoxFit.cover,
-            ),
-          ),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Align(
-                  alignment: Alignment.topCenter,
-                  child: SizedBox(
-                    height: MediaQuery.of(context).size.height / 5,
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.center,
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: Colors.grey[300],
-                        border: Border.all(color: Colors.purple, width: 4)),
-                    width: MediaQuery.of(context).size.width / 1.1,
-                    child: GridView.builder(
-                      shrinkWrap: true,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3,
-                      ),
-                      itemBuilder: (context, index) {
-                        final row = index ~/ 3;
-                        final col = index % 3;
-                        return _buildCell(col, row);
-                      },
-                      itemCount: 9,
-                    ),
-                  ),
-                ),
-                Container(
-                  height: 50,
-                  width: 250,
-                  margin: EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                      color: Colors.grey[300],
-                      border: Border.all(
-                        color: Colors.purple,
-                      ),
-                      borderRadius: BorderRadius.circular(5)),
-                  child: Center(
-                    child: Text(
-                      _winner != ''
-                          ? 'Winner: $_winner'
-                          : 'Current Player: $_currentPlayer',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
         floatingActionButton: FloatingActionButton(
+          backgroundColor: Color(0xffff3c84a3),
           onPressed: _resetGame,
-          child: Icon(Icons.refresh),
+          child: Icon(Icons.refresh, color: Colors.white),
         ),
       ),
     );
