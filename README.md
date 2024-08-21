@@ -1,16 +1,24 @@
-# ready_steady_go
+# Classic Tic Tac Toe
 
-A new Flutter project.
+**Tic Tac Toe** is a classic two-player game in which the objective is to take turns and marks (X or O) horizontally, vertically, or diagonally in a 3x3 grid.
 
-## Getting Started
+## How to Play
 
-This project is a starting point for a Flutter application.
+1. **Start the Game**: Choose your player (X or O) and begin the game.
+2. **Make Your Move**: Tap on an empty space in the grid to place your mark.
+3. **Win the Game**: The first player to align three marks in a row wins the game. The game also detects ties.
+4. **Enjoy the Music**: Background music plays throughout the game, adding an extra layer of enjoyment.
 
-A few resources to get you started if this is your first Flutter project:
+## Screenshots
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+<!-- Replace with actual screenshot URLs -->
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+  <img src="https://github.com/Sehrish-Gulzar/Tic_tac_toe_App/blob/main/assets/images/Screenshot_20240821_164232.png" style="width: 20%;"/>
+   <img src="https://github.com/Sehrish-Gulzar/Tic_tac_toe_App/blob/main/assets/images/Screenshot_20240821_164434.png" style="width: 20%;"/>
+  <img src="https://github.com/Sehrish-Gulzar/Tic_tac_toe_App/blob/main/assets/images/Screenshot_20240821_164254.png" style="width: 20%;"/>
+  <img src="https://github.com/Sehrish-Gulzar/Tic_tac_toe_App/blob/main/assets/images/Screenshot_20240821_164337.png" style="width: 20%;"/>
+   <img src="https://github.com/Sehrish-Gulzar/Tic_tac_toe_App/blob/main/assets/images/Screenshot_20240821_164353.png" style="width: 20%;"/>
+  
+</div>
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
